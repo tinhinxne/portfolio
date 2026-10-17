@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/* ---------- Thème clair (par défaut) : couleurs et polices de la maquette ---------- */
+@theme {
+  --color-brand-blue: #1e3a9e;
+  --color-brand-blue-dark: #142a7a;
+  --color-brand-purple: #6b4fa0;
+  --color-brand-purple-light: #d9cdee;
+  --color-brand-lilac: #efeaf7;
+  --color-win-gray: #c9c7cf;
+  --color-win-panel: #e4e2ea;
+  --color-ink: #17151f;
+  --color-highlight: #f5d76e;
+
+  /* Couleurs qui changent en mode sombre */
+  --color-surface: #ffffff; /* fonds blancs (cartes, champs) */
+  --color-accent: #6b4fa0; /* texte violet */
+  --color-link: #1e3a9e; /* texte bleu / liens */
+
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-pixel: "Press Start 2P", monospace;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+}
+
+:root {
+  --page-1: #ffffff;
+  --page-2: #efeaf7;
+  --page-3: #d9cdee;
+}
+
+/* ---------- Thème sombre : on redéfinit seulement les couleurs ---------- */
+:root.dark {
+  color-scheme: dark;
+
+  --page-1: #0e0b1a;
+  --page-2: #17122b;
+  --page-3: #221a40;
+
+  --color-ink: #ece9f6;
+  --color-surface: #181528;
+  --color-win-gray: #2b2842;
+  --color-win-panel: #221f37;
+  --color-brand-lilac: #2a2347;
+  --color-brand-purple-light: #3a2f66;
+  --color-brand-blue-dark: #3d5ad1;
+  --color-accent: #b79cf0;
+  --color-link: #93acff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Les ancres ne passent plus sous la barre fixe du haut */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: linear-gradient(
+    180deg,
+    var(--page-1) 0%,
+    var(--page-2) 55%,
+    var(--page-3) 100%
+  );
+  background-attachment: fixed;
+}
+
+/* ---------- Composants réutilisables (style « fenêtre rétro ») ---------- */
+@layer components {
+  .win {
+    @apply overflow-hidden rounded-xl border-2 border-brand-blue-dark bg-win-panel
+      shadow-[0_10px_30px_rgba(30,58,158,0.25)];
+  }
+
+  .win-bar {
+    @apply flex items-center justify-between bg-brand-blue px-3 py-1.5
+      font-pixel text-[9px] tracking-wide text-white;
+  }
+
+  .win-btn {
+    @apply h-4 w-4 rounded-[3px] border border-white/60 bg-white/20;
+  }
+
+  .section-badge {
+    @apply grid h-9 w-9 place-items-center rounded-md bg-brand-blue
+      font-pixel text-[10px] text-white shadow-[3px_3px_0_0_#e88fb0];
+  }
+
+  .tag {
+    @apply rounded border border-ink/10 bg-surface/70 px-2.5 py-1 text-[11px] text-ink/70;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-lg bg-brand-purple px-5 py-2.5
+      text-sm font-semibold text-white shadow-lg shadow-brand-purple/30
+      transition hover:-translate-y-0.5 hover:bg-brand-blue;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 rounded-lg border border-ink/10 bg-surface
+      px-5 py-2.5 text-sm font-semibold text-ink transition hover:-translate-y-0.5
+      hover:border-brand-purple;
+  }
+}
